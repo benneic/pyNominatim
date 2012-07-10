@@ -25,16 +25,6 @@ class Nominatim(object):
     self.session = requests.session()
     self.session.config.update({'max_retries':3})
 
-    if format == JSON:
-        self.session.headers.update({'content-type': 'application/json'})
-        self.session.headers.update({'Accept': 'application/json'})
-    elif format == XML:
-        self.session.headers.update({'content-type': 'text/xml'})
-        self.session.headers.update({'Accept': 'text/xml'})
-    elif format == HTML:
-        self.session.headers.update({'content-type': 'text/html'})
-        self.session.headers.update({'Accept': 'text/html'})
-
     self._config = {
         'format' : format,
         'email' : email,
