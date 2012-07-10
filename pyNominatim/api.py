@@ -8,9 +8,7 @@ This module provides a basic API interface to Open Street Map's Nominatim servic
 """
 import requests
 import simplejson as json
-import types
-from bunch import Bunch
-import collections
+import utils
 
 JSON='json'
 HTML='html'
@@ -21,7 +19,7 @@ BASE_URL = 'http://nominatim.openstreetmap.org/'
 class Nominatim(object):
   """The main Roamz class."""
 
-  def __init__(self, format=JSON, email=None, addressdetails=False):
+  def __init__(self, format=JSON, email=None):
 
     # Enable keep-alive and connection-pooling.
     self.session = requests.session()
@@ -40,7 +38,7 @@ class Nominatim(object):
     self._config = {
         'format' : format,
         'email' : email,
-        'addressdetails' : 1 if addressdetails else 0
+        'addressdetails' : 1
     }
     self.add_endpoints()
 
@@ -57,7 +55,8 @@ class Nominatim(object):
   def get(self, path, **kwargs):
     url = BASE_URL + path
     params = self._config.copy()
-    params.update(kwargs)
+    for (key, value) in kwargs.iteritems(): params[key] = value
+    params = utils.kwargs_converter(params)
     response = self.session.get(url, params=params)
     response.raise_for_status()
     content = json.loads(response.content)
@@ -82,6 +81,6 @@ class Reverse(Endpoint):
 
     PATH = 'reverse'
 
-    def __call__(self, longitude=0, latitude=0, zoom=18, addressdetails=False, limit=1):
-        return self.api.get(self.PATH, lat=latitude, lon=longitude, zoom=zoom, addressdetails=addressdetails, limit=limit)
+    def __call__(self, longitude=0, latitude=0, zoom=18, limit=1):
+        return self.api.get(self.PATH, lat=latitude, lon=longitude, zoom=zoom, limit=limit)
 
