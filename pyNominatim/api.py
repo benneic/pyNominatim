@@ -82,6 +82,6 @@ class Reverse(Endpoint):
 
     PATH = 'reverse'
 
-    def __call__(self, latitude, longitude, zoom=18, addressdetails=False, limit=1):
+    def __call__(self, longitude=0, latitude=0, zoom=18, addressdetails=False, limit=1):
         return self.api.get(self.PATH, lat=latitude, lon=longitude, zoom=zoom, addressdetails=addressdetails, limit=limit)
 
