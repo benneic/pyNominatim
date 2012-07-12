@@ -18,5 +18,8 @@ setup(
         'requests>=0.9.1,<1.0',
         'simplejson==2.3.2',
         'python-dateutil==1.5'
-    ]
+    ],
+    keywords='osm open street maps nominatim',
+    include_package_data=True,
+    zip_safe=True,
 )

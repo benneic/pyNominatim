@@ -11,23 +11,21 @@ import simplejson as json
 import utils
 
 JSON='json'
-HTML='html'
-XML='xml'
 
 BASE_URL = 'http://nominatim.openstreetmap.org/'
 
 class Nominatim(object):
   """The main Roamz class."""
 
-  def __init__(self, format=JSON, email=None):
+  def __init__(self, email=None):
 
     # Enable keep-alive and connection-pooling.
     self.session = requests.session()
     self.session.config.update({'max_retries':3})
 
     self._config = {
-        'format' : format,
         'email' : email,
+        'format' : JSON,
         'addressdetails' : 1
     }
     self.add_endpoints()

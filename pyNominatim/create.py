@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from .api import Nominatim, JSON
+from .api import Nominatim
 
-def create(format=JSON, email=None):
+def create(email=None):
     """Returns a Roamz instance."""
 
-    return Nominatim(format=format, email=email)
+    return Nominatim(email=email)
