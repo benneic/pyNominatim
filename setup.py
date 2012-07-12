@@ -8,7 +8,7 @@ except ImportError:
 
 setup(
     name='pyNominatim',
-    version='0.0.4',
+    version='0.1.0',
     description='Open Street Map Nominatim Client',
     author='Benn Eichhorn',
     url='https://github.com/beichhor',
